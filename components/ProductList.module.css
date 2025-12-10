@@ -1,0 +1,38 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  padding: 0;
+  gap: 24px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.productName {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.productPrice {
+  color: #666;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+  padding: 40px 0;
+}
