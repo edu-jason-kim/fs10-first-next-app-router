@@ -6,7 +6,9 @@ export default async function SearchPage({ searchParams }) {
   const { q } = await searchParams;
 
   const response = await fetch(
-    "https://learn.codeit.kr/api/codeitmall/products" + `?q=${q}`
+    // q의 값이 동적이기 때문에 자동으로 페이지가 SSR로 설정됨
+    "https://learn.codeit.kr/api/codeitmall/products" + `?q=${q}`,
+    { cache: 'no-store' } // 캐싱을 하지 않겠다는 옵션 -> SSR로 동작
   );
   const data = await response.json();
   const products = data.results;
