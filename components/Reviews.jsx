@@ -5,7 +5,10 @@ export default async function Reviews({ productId }) {
   const response = await fetch(
     "https://learn.codeit.kr/api/codeitmall/size_reviews" +
       `?product_id=${productId}`,
-    { cache: "no-store" } // SSR
+    {
+      cache: "no-store", // SSR
+      next: { tags: [`size_reviews-${productId}`] },
+    }
   );
   const data = await response.json();
   const reviews = data.results;

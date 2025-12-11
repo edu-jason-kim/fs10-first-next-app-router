@@ -1,10 +1,12 @@
 // 다이나믹 라우트에서 SSG로 라우팅 하고 싶은 경우,
 // generateStaticParams 서버 함수 활용
 
+import { createReviewAction } from "@/app/actions";
 import Reviews from "@/components/Reviews";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import SubmitButton from "./components/SubmitButton";
 
 export async function generateStaticParams() {
   const response = await fetch(
@@ -59,6 +61,35 @@ export default async function ProductDetailPage({ params }) {
       <Suspense fallback={<p>로딩중입니다...</p>}>
         <Reviews productId={id} />
       </Suspense>
+
+      <hr />
+
+      <h2>사이즈 리뷰 작성</h2>
+
+      <form action={createReviewAction} style={{ paddingBottom: "500px" }}>
+        <input type="hidden" name="productId" value={id} required />
+        <select name="sex" required>
+          <option value="">성별 선택</option>
+          <option value="male">남성</option>
+          <option value="female">여성</option>
+        </select>
+        <input type="number" name="height" placeholder="키 (cm)" required />
+        <select name="size" required>
+          <option value="">사이즈 선택</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+        <select name="fit" required>
+          <option value="">핏 선택</option>
+          <option value="small">작음</option>
+          <option value="good">적당함</option>
+          <option value="big">큼</option>
+        </select>
+
+        <SubmitButton>리뷰 작성</SubmitButton>
+      </form>
     </main>
   );
 }
