@@ -1,8 +1,10 @@
 // 다이나믹 라우트에서 SSG로 라우팅 하고 싶은 경우,
 // generateStaticParams 서버 함수 활용
 
+import Reviews from "@/components/Reviews";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const response = await fetch(
@@ -34,6 +36,14 @@ export default async function ProductDetailPage({ params }) {
     <main>
       <h1>{product.name}</h1>
       <Image src={product.imgUrl} width={300} height={300} alt={product.name} />
+
+      <hr />
+
+      <h2>사이즈 리뷰</h2>
+
+      <Suspense fallback={<p>로딩중입니다...</p>}>
+        <Reviews productId={id} />
+      </Suspense>
     </main>
   );
 }
