@@ -18,6 +18,21 @@ export async function generateStaticParams() {
   });
 }
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+
+  const response = await fetch(
+    `https://learn.codeit.kr/api/codeitmall/products/${id}`
+  );
+
+  const product = await response.json();
+
+  // 생성하고자 하는 metadata 객체를 응답
+  return {
+    title: `Codeitmall::${product.name}`,
+  };
+}
+
 // [id]의 id 값은 params에서 받음
 export default async function ProductDetailPage({ params }) {
   const { id } = await params;

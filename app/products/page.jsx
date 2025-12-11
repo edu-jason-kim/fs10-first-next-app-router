@@ -1,5 +1,9 @@
 import Counter from "./components/Counter";
 
+export const metadata = {
+  title: 'Codeitmall::상품 페이지'
+}
+
 // 서버에서만 실행하는 컴포넌트 -> 목적이 서버에서 HTML만드는 것
 export default async function ProductsPage() {
   const response = await fetch(

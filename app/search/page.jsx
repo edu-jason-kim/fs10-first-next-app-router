@@ -1,6 +1,14 @@
 import ProductList from "@/components/ProductList";
 import SearchForm from "@/components/SearchForm";
 
+export async function generateMetadata ({ searchParams }) {
+  const { q } = await searchParams;
+
+  return {
+    title: `검색결과: ${q}`
+  }
+}
+
 export default async function SearchPage({ searchParams }) {
   // 서버에서 쿼리 스트링 접근
   const { q } = await searchParams;
